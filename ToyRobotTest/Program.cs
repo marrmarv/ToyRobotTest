@@ -150,6 +150,59 @@
                     }
                 }
             } while (input != null); // Continue the loop until the user exits
+
+            // For reading from command file, the code would look like below:
+            //try
+            //{
+            //    // Read all lines from the file
+            //    string[] commands = File.ReadAllLines(filePath);
+
+            //    // Process each command from the file
+            //    foreach (string command in commands)
+            //    {
+            //        // Split the command into parts based on whitespace
+            //        string[] parts = command.Split(' ');
+            //        switch (parts[0])
+            //        {
+            //            case "PLACE":
+            //                // If the command is PLACE, extract the position and direction parameters and place the robot
+            //                string[] placeParams = parts[1].Split(',');
+            //                if (placeParams.Length == 3)
+            //                {
+            //                    int x = int.Parse(placeParams[0]);
+            //                    int y = int.Parse(placeParams[1]);
+            //                    bool success = Enum.TryParse<Direction>(placeParams[2], out Direction facing);
+            //                    if (success)
+            //                        robot.Place(x, y, facing);
+            //                }
+            //                break;
+            //            case "MOVE":
+            //                // If the command is MOVE, move the robot one unit forward
+            //                robot.Move();
+            //                break;
+            //            case "LEFT":
+            //                // If the command is LEFT, rotate the robot 90 degrees to the left
+            //                robot.Left();
+            //                break;
+            //            case "RIGHT":
+            //                // If the command is RIGHT, rotate the robot 90 degrees to the right
+            //                robot.Right();
+            //                break;
+            //            case "REPORT":
+            //                // If the command is REPORT, output the current position and direction of the robot
+            //                robot.Report();
+            //                break;
+            //            default:
+            //                Console.WriteLine("Unknown Command!");
+            //                break;
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    // Handle any errors that occur during file reading or command execution
+            //    Console.WriteLine($"An error occurred: {ex.Message}");
+            //}
         }
     }
 }
