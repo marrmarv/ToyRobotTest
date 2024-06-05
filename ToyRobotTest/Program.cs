@@ -1,4 +1,6 @@
-﻿namespace ToyRobotSimulation
+﻿using System.IO;
+
+namespace ToyRobotSimulation
 {
     // Define an enumeration for the directions
     public enum Direction
@@ -117,15 +119,18 @@
                     switch (parts[0])
                     {
                         case "PLACE":
-                            // If the command is PLACE, extract the position and direction parameters and place the robot
-                            string[] placeParams = parts[1].Split(',');
-                            if (placeParams.Length == 3)
+                            // If the command is PLACE, extract the position and direction parameters and place the robot - only if we have a second part
+                            if (parts.Length == 2)
                             {
-                                int x = int.Parse(placeParams[0]);
-                                int y = int.Parse(placeParams[1]);
-                                bool success = Enum.TryParse<Direction>(placeParams[2], out Direction facing);
-                                if (success)
-                                    robot.Place(x, y, facing);
+                                string[] placeParams = parts[1].Split(',');
+                                if (placeParams.Length == 3)
+                                {
+                                    bool successX = int.TryParse(placeParams[0], out int x);
+                                    bool successY = int.TryParse(placeParams[1], out int y);
+                                    bool successF = Enum.TryParse<Direction>(placeParams[2], out Direction facing);
+                                    if (successX && successY && successF)
+                                        robot.Place(x, y, facing);
+                                }
                             }
                             break;
                         case "MOVE":
@@ -165,15 +170,18 @@
             //        switch (parts[0])
             //        {
             //            case "PLACE":
-            //                // If the command is PLACE, extract the position and direction parameters and place the robot
-            //                string[] placeParams = parts[1].Split(',');
-            //                if (placeParams.Length == 3)
+            //                // If the command is PLACE, extract the position and direction parameters and place the robot - only if we have a second part
+            //                if (parts.Length == 2)
             //                {
-            //                    int x = int.Parse(placeParams[0]);
-            //                    int y = int.Parse(placeParams[1]);
-            //                    bool success = Enum.TryParse<Direction>(placeParams[2], out Direction facing);
-            //                    if (success)
-            //                        robot.Place(x, y, facing);
+            //                    string[] placeParams = parts[1].Split(',');
+            //                    if (placeParams.Length == 3)
+            //                    {
+            //                        bool successX = int.TryParse(placeParams[0], out int x);
+            //                        bool successY = int.TryParse(placeParams[1], out int y);
+            //                        bool successF = Enum.TryParse<Direction>(placeParams[2], out Direction facing);
+            //                        if (successX && successY && successF)
+            //                            robot.Place(x, y, facing);
+            //                    }
             //                }
             //                break;
             //            case "MOVE":
